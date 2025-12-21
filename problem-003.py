@@ -1,25 +1,25 @@
 from math import sqrt, floor
+from time import time
 
 def find_primes_under_num(num):
     # Sieve of Eratosthenes
     p = 2
-    primes_set = set()
-    marked_set = set()
+    primes_bool_array = [True for x in range(floor(sqrt(num))+1)]
+    primes_bool_array[0] = False
+    primes_bool_array[1] = False
 
     num = floor(sqrt(num))
 
-    while p <= num:
-        primes_set.add(p)
-        for i in range(p,num+1,p):
-            if i not in marked_set:
-                marked_set.add(i)
+    for i in range(2,len(primes_bool_array)):
+        if primes_bool_array[i] == True:
+            for num in range(2*i,num+1,i):
+                primes_bool_array[num] = False
 
-        for j in range(p,num+1):
-            if j not in marked_set:
-                p = j
-                break
-            else:
-                p += 1
+    primes_set = set()
+
+    for i in range(len(primes_bool_array)):
+        if primes_bool_array[i] == True:
+            primes_set.add(i)
 
     return primes_set
 
@@ -36,6 +36,6 @@ def find_max_prime_factor(num):
 
     return max(factors)
 
-print(find_max_prime_factor(600851475143))
+print(find_max_prime_factor(14))
 
-# Low performance, requires optimising.
+# Works but can use some bug fixes for certains nums being passed (e.g. 14)
