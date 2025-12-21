@@ -6,6 +6,8 @@ def find_primes_under_num(num):
     primes = []
     marked = []
 
+    num = floor(sqrt(num))
+
     while p <= num:
         primes.append(p)
         for i in range(p,num+1,p):
@@ -21,15 +23,19 @@ def find_primes_under_num(num):
 
     return primes
 
+def find_prime_factors(num):
 
+    primes_under_number = find_primes_under_num(num)
 
+    factors = []
+    for prime in primes_under_number:
 
+        while num % prime == 0:
+            factors.append(prime)
+            num /= prime
 
+    return factors
 
+print(max(find_prime_factors(13195)))
 
-
-
-
-
-
-
+# Low performance, requires optimising.
