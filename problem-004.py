@@ -7,10 +7,11 @@ for factor_1 in range(100,1000):
 
         product = list(str(product))
 
-
         digits_in_product = len(product)
 
-        for i in range((len(product)//2)):
+        number_range = len(product)//2
+
+        for i in range(number_range):
             if product[i] == product.pop():
                 continue
             else:
