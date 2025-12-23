@@ -1,25 +1,30 @@
 current_max_factors = [None, None]
+biggest_palindrome = 0
 
 for factor_1 in range(100,1000):
     for factor_2 in range(100,1000):
 
-        product = factor_1 * factor_2
+        product_int = factor_1 * factor_2
 
-        product = list(str(product))
+        product_list = list(str(product_int))
 
-        digits_in_product = len(product)
+        digits_in_product = len(product_list)
 
-        number_range = len(product)//2
+        number_range = len(product_list)//2 # Unneccessary but adds clarity
 
-        for i in range(number_range):
-            if product[i] == product.pop():
-                continue
+        if product_int > biggest_palindrome:
+            for i in range(number_range):
+                if product_list[i] == product_list.pop():
+                    continue
+                else:
+                    break
+
             else:
-                break
+                if product_int > biggest_palindrome:
+                    current_max_factors[0] = factor_1
+                    current_max_factors[1] = factor_2
+                    biggest_palindrome = product_int
 
-        else:
-            current_max_factors[0] = factor_1
-            current_max_factors[1] = factor_2
 
 print(current_max_factors)
 print(current_max_factors[0]*current_max_factors[1])
